@@ -1,0 +1,1 @@
+select sum(i * (i - 1 - (i + 1) % 2)) result from generate_series(3, 1000) i;
