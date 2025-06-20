@@ -33,4 +33,4 @@ def permutations(n, tile):
         result = 1
     return result
 
-print(sum(permutations(60, i) for i in tiles))
+print(sum(permutations(N, i) for i in tiles))
