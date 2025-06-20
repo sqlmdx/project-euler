@@ -2,8 +2,7 @@
 create table keylog(id int generated always as identity, digits text);
 
 copy keylog(digits)
-from '0079_keylog.txt'
-delimiter ',';
+from '0079_keylog.txt';
 */
 
 -- two step solution

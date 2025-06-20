@@ -2,8 +2,7 @@
 create table triangle(id int generated always as identity, str text);
 
 copy triangle(str)
-from 'C:\git\project-euler\input\0067_triangle.txt'
-delimiter ',';
+from '0067_triangle.txt';
 */
 
 with recursive

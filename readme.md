@@ -17,15 +17,16 @@ In some cases I also included python solutions... Well, ok, I must confess - for
 
 ## Oracle specific solutions
 
-There was one problem ([54](https://projecteuler.net/problem=54)) where `match_recognize` looks as more or less natural solution. Alternatively this can be solved in SQL with multiple subqueries and window functions but that would look much more cumbersome than `match_recognize` solution.
+There was one problem ([Poker Hands](https://projecteuler.net/problem=54)) where `match_recognize` looks as more or less natural solution. Alternatively this can be solved in SQL with multiple subqueries and window functions but that would look much more cumbersome than `match_recognize` solution.
 
 A few times I used `model clause` but that does not necessarily mean that this is the only possible SQL solution.
 * Solution for [Problem 5](https://projecteuler.net/problem=5) shows how we can utilize `model` to work with auxiliary array-like structures.
 * Solution for [Problem 11](https://projecteuler.net/problem=11) shows how `model` can help to avoid joins.
+* Solution for [Problem 81](https://projecteuler.net/problem=81) shows how we can traverse matrix with `model` (see also PG solution for comparison).
 * Solutions for [Problem 116](https://projecteuler.net/problem=116) and [Problem 117](https://projecteuler.net/problem=117) are really elegant (imho) implementations with `model` of dynamic programming (DP) algorithms but recursive CTE can be used instead - see PG solution for Problem 117.
 * Solution for [Problem 121](https://projecteuler.net/problem=121) is yet another DP algorithm implemented in SQL. In this case algorithm is implemented with `iterate` + `for-loop` in rules and uses an array-like structure constructed on a previous iteration so CTE alternative is not that straightforward here - see **Advanced SQL tricks**.
 
-The last problem to highlight is ([Problem 17](https://projecteuler.net/problem=17)) - classical task to **spell the number**. For this one I included both Oracle and PG solutions to compare built-in features. Another problem where I found interesting to compare Oracle and PG solutions is [Problem 229](https://projecteuler.net/problem=229) - but the focus here is on performance comparison.
+The last problem to highlight is [Problem 17](https://projecteuler.net/problem=17) - classical task to **spell the number**. For this one I included both Oracle and PG solutions to compare built-in features. Another problem where I found interesting to compare Oracle and PG solutions is [Problem 229](https://projecteuler.net/problem=229) - but the focus here is on performance comparison.
 
 ## Typical SQL tricks
 
@@ -43,9 +44,9 @@ Neither in Oracle nor in PG recursive CTE allows using `group by` in recursive m
 
 * PG allows using `distinct` in recursive member (hence we can apply silly workaround for `group by` - analytic (window) functions + `distinct`). In Oracle we still can do (kind of) grouping in recursive member by using window functions and taking first row from each group on the next step (this requires additional column for row_number). *Please never ever use in real life tricks with window functions as an alternative to `group by`*. :wink:
 
-For an example of recursive CTE with `distinct` in recursive member check the solution for ([Problem 92](https://projecteuler.net/problem=92)) or perhaps ([Problem 171](https://projecteuler.net/problem=171)) which is very similar.
+For an example of recursive CTE with `distinct` in recursive member check the solution for [Problem 92](https://projecteuler.net/problem=92) or perhaps [Problem 171](https://projecteuler.net/problem=171) which is very similar. There are a few more solutions with this trick in the repo. For example, for [Problem 14](https://projecteuler.net/problem=14),  [Problem 81](https://projecteuler.net/problem=81), [Problem 164](https://projecteuler.net/problem=164), [Problem 172](https://projecteuler.net/problem=172), etc.
 
-At first glance there might be an impression that recursive CTE can be used as an alternative to a single for-loop in imperative language. In reality id does not matter how many nested loops logic requires in imperative style. In general case that can be re-written into a single for-loop and eventually implemented with recursive CTE. For a specific example - see ([Problem 173](https://projecteuler.net/problem=173)) and its implementation with python. As well as ([Problem 3](https://projecteuler.net/problem=3)) where we do prime factorization in SQL.
+At first glance there might be an impression that recursive CTE can be used as an alternative to a single for-loop in imperative language. In reality id does not matter how many nested loops logic requires in imperative style. In general case that can be re-written into a single for-loop and eventually implemented with recursive CTE. For a specific example - see [Problem 173](https://projecteuler.net/problem=173) and its implementation with python. As well as [Problem 3](https://projecteuler.net/problem=3) where we do prime factorization in SQL.
 
 The last but not least detail is that recursive CTE allows accessing only recordset generated on a previous iteration. So if there is a need to access something from earlier iterations then you might need to either duplicate that data again and again on every iteration or consider using `model`. The great example of this is Oracle and PG solutions for [Problem 117](https://projecteuler.net/problem=117).
 
