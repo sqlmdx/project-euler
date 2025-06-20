@@ -87,7 +87,3 @@ Examples where it could be done in SQL but I did not publish SQL solution includ
 There are still a few SQL solutions which use table with primes numbers. It is generated with script `eubler_lib.sql` however it could also be generated with `euler_10_brute_force.sql` (even faster :smile:). 
 
 Some solutions have "brute_force" suffix in the file name. Usually those solutions are accompanied by not brute force solutions but not always. Also if file name does not have "brute_force" suffix that does not necessarily mean that solution is not brute force. :wink:
-
-##
-
-If you wish to contact me please do so :two::nine::four::four::seven::nine::four:@gmail.com
