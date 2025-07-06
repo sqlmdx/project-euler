@@ -22,11 +22,15 @@ There was one problem ([Poker Hands](https://projecteuler.net/problem=54)) where
 A few times I used `model clause` but that does not necessarily mean that this is the only possible SQL solution.
 * Solution for [Problem 5](https://projecteuler.net/problem=5) shows how we can utilize `model` to work with auxiliary array-like structures.
 * Solution for [Problem 11](https://projecteuler.net/problem=11) shows how `model` can help to avoid joins.
-* Solution for [Problem 81](https://projecteuler.net/problem=81) shows how we can traverse matrix with `model` (see also PG solution for comparison).
+* Solution for [Problem 81](https://projecteuler.net/problem=81) shows how we can traverse matrix with `model`.
 * Solutions for [Problem 116](https://projecteuler.net/problem=116) and [Problem 117](https://projecteuler.net/problem=117) are really elegant (imho) implementations with `model` of dynamic programming (DP) algorithms but recursive CTE can be used instead - see PG solution for Problem 117.
 * Solution for [Problem 121](https://projecteuler.net/problem=121) is yet another DP algorithm implemented in SQL. In this case algorithm is implemented with `iterate` + `for-loop` in rules and uses an array-like structure constructed on a previous iteration so CTE alternative is not that straightforward here - see **Advanced SQL tricks**.
 
-The last problem to highlight is [Problem 17](https://projecteuler.net/problem=17) - classical task to **spell the number**. For this one I included both Oracle and PG solutions to compare built-in features. Another problem where I found interesting to compare Oracle and PG solutions is [Problem 229](https://projecteuler.net/problem=229) - but the focus here is on performance comparison.
+Yet another problem to highlight is [Problem 17](https://projecteuler.net/problem=17) - classical task to **spell the number**. For this one I included both Oracle and PG solutions to compare built-in features. 
+
+One more problem where I found interesting to compare Oracle and PG solutions is [Problem 229](https://projecteuler.net/problem=229) - but the focus here is on performance comparison.
+
+Finally, [Problem 81](https://projecteuler.net/problem=81) and [Problem 82](https://projecteuler.net/problem=82) have both Oracle and PG solutions based on recursive CTE. Oracle solutions demostrate how we can overcome some limitations in recusive member specific to Oracle.
 
 ## Typical SQL tricks
 
@@ -46,7 +50,7 @@ Neither in Oracle nor in PG recursive CTE allows using `group by` in recursive m
 
 For an example of recursive CTE with `distinct` in recursive member check the solution for [Problem 92](https://projecteuler.net/problem=92) or perhaps [Problem 171](https://projecteuler.net/problem=171) which is very similar. There are a few more solutions with this trick in the repo. For example, for [Problem 14](https://projecteuler.net/problem=14),  [Problem 81](https://projecteuler.net/problem=81), [Problem 164](https://projecteuler.net/problem=164), [Problem 172](https://projecteuler.net/problem=172), etc.
 
-Solution for [Problem 82](https://projecteuler.net/problem=82) is a great example of advanced capabilities in recursive CTE in PG. It requires both `distinct` and inline view in recursive member to get the job done.
+Solution for [Problem 82](https://projecteuler.net/problem=82) is nice example of advanced capabilities in recursive CTE in PG. It requires both `distinct` and inline view in recursive member to get the job done. However, if we factor out some logic and apply it before recursive CTE then this problem can be solved in Oracle as well.
 
 At first glance there might be an impression that recursive CTE can be used as an alternative to a single for-loop in imperative language. In reality id does not matter how many nested loops logic requires in imperative style. In general case that can be re-written into a single for-loop and eventually implemented with recursive CTE. For a specific example - see [Problem 173](https://projecteuler.net/problem=173) and its implementation with python. As well as [Problem 3](https://projecteuler.net/problem=3) where we do prime factorization in SQL.
 

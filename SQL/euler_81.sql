@@ -19,7 +19,8 @@ r as
 	union all
 	select distinct t.i, t.j, t.n + min(r.n) over (partition by t.i, t.j)
 	from r
-	join t on (t.i, t.j) = (r.i + 1, r.j) or (t.i, t.j) = (r.i, r.j + 1)
+	cross join (select 1 di, 0 dj union all select 0, 1) x
+	join t on (t.i, t.j) = (r.i + x.di, r.j + x.dj)
 )
 select n result
 from r
