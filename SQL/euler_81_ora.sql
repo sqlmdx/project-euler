@@ -31,19 +31,15 @@ t as
    -- to avoid ORA-00600: internal error code, arguments: [qmxqrsProcessRsltSeq:itemTyp]
    where rownum >= 1 
 ),
-r(lvl, i, j, n, rn) as
+r(i, j, n, rn) as
 (
-   select 1, i, j, n, 1
+   select i, j, n, 1
    from t
    where (i, j) = ((1, 1))
    union all
-   select r.lvl+1, t.i, t.j, t.n + r.n, row_number() over (partition by t.i, t.j order by r.n)
-   from r
-   cross join (select 1 di, 0 dj from dual union all select 0, 1 from dual) x
-   join t on (t.i, t.j) = ((r.i + x.di, r.j + x.dj))
-   where r.rn = 1
-)
--- cycle = 0 for all rows but without this clause query fails with ORA-32044 (not sure why)
-cycle lvl set cycle to 1 default 0  
+   select t.i, t.j, t.n + r.n, row_number() over (partition by t.i, t.j order by r.n)
+   from r, (select 1 di, 0 dj from dual union all select 0, 1 from dual) x, t 
+   where (t.i, t.j) = ((r.i + x.di, r.j + x.dj)) and r.rn = 1
+)  
 select min(n) keep (dense_rank last order by i+j) result
 from r;
