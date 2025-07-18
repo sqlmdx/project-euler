@@ -6,9 +6,8 @@ with m as
     dimension by (0 id)
     measures (1 result)
     rules
-    iterate(50)
     (
-        result[iteration_number+1] = sum(result)[id between iteration_number - 3 and iteration_number]
+        result[for id from 1 to 50 increment 1] = sum(result)[id between cv() - 4 and cv()]
     )
 )
 select result
