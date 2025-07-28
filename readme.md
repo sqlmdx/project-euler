@@ -25,14 +25,14 @@ A few times I used `model clause` but that does not necessarily mean that this i
 * Solution for [Problem 81](https://projecteuler.net/problem=81) shows how we can traverse matrix with `model`.
 * Solutions for [Problem 116](https://projecteuler.net/problem=116) and [Problem 117](https://projecteuler.net/problem=117) are really elegant (imho) implementations with `model` of dynamic programming (DP) algorithms but recursive CTE can be used instead - see PG solution for Problem 117.
 * Solution for [Problem 121](https://projecteuler.net/problem=121) is yet another DP algorithm implemented in SQL. In this case algorithm is implemented with `iterate` + `for-loop` in rules and uses an array-like structure constructed on a previous iteration so CTE alternative is not that straightforward here - see **Advanced SQL tricks**.
-* Solution for [Problem 191](https://projecteuler.net/problem=191) shows that with model we can "see" more than one step back and we do not need extra columns for that like in case of recursive CTE.
-* Solution for [Problem 854](https://projecteuler.net/problem=854) shows that `model` solution requires less columns than recursive CTE but unfortunately `model` runs much slower for this specific task.
+
+On several occasions `model clause` was used just to show that we can "see" more than one step back and we do not need extra columns for that like in case of recursive CTE. In particular, solutions for [Problem 114](https://projecteuler.net/problem=114), [Problem 115](https://projecteuler.net/problem=115) (this is probably the best example because for this problem we need to look 50 steps back), [Problem 191](https://projecteuler.net/problem=191) and [Problem 854](https://projecteuler.net/problem=854) (unfortunately `model` runs much slower that recursive CTE solution for this specific task even though it requires less columns).
 
 Yet another problem to highlight is [Problem 17](https://projecteuler.net/problem=17) - classical task to **spell the number**. For this one I included both Oracle and PG solutions to compare built-in features. 
 
 One more problem where I found interesting to compare Oracle and PG solutions is [Problem 229](https://projecteuler.net/problem=229) - but the focus here is on performance comparison.
 
-Finally, [Problem 81](https://projecteuler.net/problem=81) and [Problem 82](https://projecteuler.net/problem=82) have both Oracle and PG solutions based on recursive CTE. Oracle solutions demostrate how we can overcome some limitations in recusive member specific to Oracle.
+Finally, [Problem 81](https://projecteuler.net/problem=81) and [Problem 82](https://projecteuler.net/problem=82) have both Oracle and PG solutions based on recursive CTE. Oracle solutions demonstrate how we can overcome some limitations in recursive member specific to Oracle.
 
 ## Typical SQL tricks
 
@@ -88,11 +88,11 @@ A number of python solutions rely on `euler_lib.py` which has a couple of freque
 No.
 
 Examples where it could be done in SQL but I did not publish SQL solution include:
-* One liners. Problems 15, 20, 53, 56, 69, 493, etc. This is nice an beautiful in python but would look a bit awkward in SQL with many lines of code.
+* One liners. Problems 15, 20, 53, 56, 69, 493, etc. This is nice and beautiful in python but would look a bit awkward in SQL with many lines of code.
 * There are also a number of solutions which are trivial in python but would look quite cumbersome in SQL.
     * related to primes 46, 47, 49 
     * others 93, etc
 
 There are still a few SQL solutions which use table with primes numbers. It is generated with script `eubler_lib.sql` however it could also be generated with `euler_10_brute_force.sql` (even faster :smile:). 
 
-Some solutions have "brute_force" suffix in the file name. Usually those solutions are accompanied by not brute force solutions but not always. Also if file name does not have "brute_force" suffix that does not necessarily mean that solution is not brute force. :wink:
+Some solutions have "brute_force" suffix in the file name. Usually those solutions are accompanied by not brute force solutions but not always. Also, if file name does not have "brute_force" suffix that does not necessarily mean that solution is not brute force. :wink:

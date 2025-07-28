@@ -1,3 +1,5 @@
+E = 1e-9
+
 def eval(x, y, op):
     if x == None or y == None:
         return None
@@ -8,7 +10,7 @@ def eval(x, y, op):
     if op == '*':
         return x*y
     if op == '/':
-        if y == 0:
+        if abs(y) < E:
             return None
         else:
             return x/y
@@ -34,7 +36,7 @@ for c in combinations(range(1, 10), 4):
     targets = []
     for p in permutations(c):
         targets += get_targets(p)
-    distinct_targets = list(set([int(r) for r in targets if r != None and r > 0 and round(r) == r]))
+    distinct_targets = sorted(list(set([round(r) for r in targets if r != None and r > 0 and abs(round(r) - r) < E])))
     result += ((c, check_targets(distinct_targets)), )
 
 best_target = sorted(result, key = lambda x: x[1], reverse = True)[0][0]

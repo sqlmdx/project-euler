@@ -25,4 +25,4 @@ select length(regexp_replace(regexp_replace(str,'0|\.', '', 'g'),
 							 '(2)|(3)|(4)|(5)|(6)|(7)|(8)|(9)',
 							 '\1\1\2\2\2\3\3\3\3\4\4\4\4\4\5\5\5\5\5\5\6\6\6\6\6\6\6\7\7\7\7\7\7\7\7\8\8\8\8\8\8\8\8\8',
 							 'g')) result
-from (select power(2::numeric, 1000)::text str) t
+from (select power(2::numeric, 1000)::text str) t;
